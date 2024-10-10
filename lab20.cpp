@@ -3,10 +3,14 @@
 
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
+#include <ctime> 
 
 using namespace std;
 
 const int SIZE = 3;
+// min/max for random prices
+const int MIN = 10000, MAX = 99999;
 
 class Chair 
 {
@@ -20,20 +24,22 @@ class Chair
     Chair() 
     {
         prices = new double[SIZE];
-        legs = 0;
+        // randomly assign 3 or 4 legs
+        legs = int (rand() % 2) + 3;
         for (int i = 0; i < SIZE; i++)
         {
-            prices[i] = 0;
+            // randomly select prices
+            prices[i] = (rand() % (MAX-MIN+1) + MIN) / (double) 100;
         }
     }
 
-    Chair(int l) 
+    Chair(int l, const double pr[SIZE]) 
     {
         prices = new double[SIZE];
         legs = l;
         for (int i = 0; i < SIZE; i++)
         {
-            prices[i] = 0;
+            prices[i] = pr[i];
         }   
     }
 
@@ -72,13 +78,16 @@ class Chair
 
 int main() 
 {
+    // seed random num generator
+    srand(static_cast<unsigned int>(time(0)));
+
     cout << fixed << setprecision(2);
 
     //creating pointer to first chair object
     Chair *chairPtr = new Chair;
-    chairPtr->setLegs(4);
-    chairPtr->setPrices(121.21, 232.32, 414.14);
     chairPtr->print();
+    // free the memory
+    delete chairPtr;
 
     //creating dynamic chair object with constructor
     Chair *livingChair = new Chair(3);

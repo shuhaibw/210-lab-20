@@ -43,6 +43,12 @@ class Chair
         }   
     }
 
+    // Destructor
+    ~Chair() 
+    {
+        delete[] prices;
+    }
+
     // setters and getters
     void setLegs(int l) { legs = l; }
 
@@ -88,27 +94,27 @@ int main()
     chairPtr->print();
     // free the memory
     delete chairPtr;
+    chairPtr = nullptr;
 
     //creating dynamic chair object with constructor
-    Chair *livingChair = new Chair(3);
-    livingChair->setPrices(525.25, 434.34, 252.52);
+    double chairPrices[SIZE] = {525.25, 434.34, 252.52};
+    // sending in an array with 3 prices
+    Chair *livingChair = new Chair(3, chairPrices);
     livingChair->print();
     delete livingChair;
     livingChair = nullptr;
 
     //creating dynamic array of chair objects
     Chair *collection = new Chair[SIZE];
-    collection[0].setLegs(4);
-    collection[0].setPrices(441.41, 552.52, 663.63);
-    collection[1].setLegs(4);
-    collection[1].setPrices(484.84, 959.59, 868.68);
-    collection[2].setLegs(4);
-    collection[2].setPrices(626.26, 515.15, 757.57);
-
+    // print the collection
     for (int i = 0; i < SIZE; i++)
     {
         collection[i].print();
     }
+
+    // free the dynamic array
+    delete[] collection;
+    collection = nullptr;
 
     return 0;
 }

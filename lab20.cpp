@@ -9,7 +9,7 @@
 using namespace std;
 
 const int SIZE = 3;
-// min/max for random prices
+// min and max for random prices
 const int MIN = 10000, MAX = 99999;
 
 class Chair 
@@ -19,8 +19,7 @@ class Chair
         double * prices;
 
     public:
-
-    // constructors
+    // default constructor
     Chair() 
     {
         prices = new double[SIZE];
@@ -33,6 +32,7 @@ class Chair
         }
     }
 
+    // parameter constructor
     Chair(int l, const double pr[SIZE]) 
     {
         prices = new double[SIZE];
@@ -89,14 +89,14 @@ int main()
 
     cout << fixed << setprecision(2);
 
-    //creating pointer to first chair object
+    // creating pointer to first chair object
     Chair *chairPtr = new Chair;
     chairPtr->print();
     // free the memory
     delete chairPtr;
     chairPtr = nullptr;
 
-    //creating dynamic chair object with constructor
+    // creating dynamic chair object with constructor
     double chairPrices[SIZE] = {525.25, 434.34, 252.52};
     // sending in an array with 3 prices
     Chair *livingChair = new Chair(3, chairPrices);
@@ -104,7 +104,7 @@ int main()
     delete livingChair;
     livingChair = nullptr;
 
-    //creating dynamic array of chair objects
+    // creating dynamic array of chair objects
     Chair *collection = new Chair[SIZE];
     // print the collection
     for (int i = 0; i < SIZE; i++)
